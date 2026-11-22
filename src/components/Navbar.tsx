@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image"; // 👈 Image component import kiya
+import Image from "next/image";
 
 export default function Navbar() {
   const [productOpen, setProductOpen] = useState(false);
@@ -14,18 +14,19 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 bg-[#F5F2EB] border-b border-[#C7B89A]/50 select-none">
+      {/* Navbar height normal h-20 rakhi hai */}
       <nav className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between gap-4">
         
-        {/* 1. LEFT: Brand Logo (Ab yahan image aayegi) */}
-        <div className="flex-shrink-0">
-          <Link href="/" className="group block">
+        {/* 1. LEFT: Brand Logo (Bara aur Readable with scale-125) */}
+        <div className="flex-shrink-0 relative flex items-center">
+          <Link href="/" className="group block py-1">
             <Image
               src="/logo.webp"
               alt="ROMO Furnishers"
-              width={130} // Aap apne logo ke size ke mutabiq width barha ya ghata sakti hain
-              height={45} // Height adjust kar sakti hain
+              width={350}
+              height={190}
               priority={true}
-              className="object-contain h-10 w-auto"
+              className="object-contain w-auto h-16 md:h-20 max-w-none transform scale-125 origin-left"
             />
           </Link>
         </div>
@@ -192,9 +193,9 @@ export default function Navbar() {
                 <Image
                   src="/logo.webp"
                   alt="ROMO Furnishers"
-                  width={110}
-                  height={40}
-                  className="object-contain h-8 w-auto"
+                  width={130}
+                  height={50}
+                  className="object-contain h-10 w-auto transform scale-110 origin-left"
                 />
                 <button 
                   onClick={() => setMobileMenuOpen(false)}
