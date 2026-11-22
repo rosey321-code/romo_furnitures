@@ -4,12 +4,12 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
 const CLIENT_PROJECTS = [
-  { id: 1, name: "Silaj", image: "/projects/Project1.webp" },
-  { id: 2, name: "Sheikh Jee", image: "/projects/Project2.webp" },
-  { id: 3, name: "Classic Interior", image: "/projects/Project3.webp" },
-  { id: 4, name: "Raheem Interiors", image: "/projects/Project4.webp" },
-  { id: 5, name: "Mr. Barry", image: "/projects/Project5.webp" },
-  { id: 6, name: "Bilal Interior", image: "/projects/Project6.webp" },
+  { id: 1, name: "Silaj", image: "/projects/project1.webp" },
+  { id: 2, name: "Sheikh Jee", image: "/projects/project2.webp" },
+  { id: 3, name: "Classic Interior", image: "/projects/project3.webp" },
+  { id: 4, name: "Raheem Interiors", image: "/projects/project4.webp" },
+  { id: 5, name: "Mr. Barry", image: "/projects/project5.webp" },
+  { id: 6, name: "Bilal Interior", image: "/projects/project6.webp" },
 ];
 
 export default function ColorVibrancy() {

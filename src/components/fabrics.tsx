@@ -22,16 +22,6 @@ export default function ShadeFilter() {
       ? FABRICS_LIST
       : FABRICS_LIST.filter((item) => item.name === selectedCategory);
 
-  // Responsive items per page: 2 for mobile, 4 for desktop
-  const getItemsPerPage = () => {
-    if (typeof window !== "undefined" && window.innerWidth < 768) {
-      return 2;
-    }
-    return 4;
-  };
-
-  // Safe slice based on current index
-  const itemsPerPage = 4; // desktop default logic
   const currentItems = filteredProducts.slice(currentIndex, currentIndex + 4);
 
   const handleNext = () => {
@@ -69,7 +59,7 @@ export default function ShadeFilter() {
           </h2>
         </div>
 
-        {/* Fabric Filter Tabs (Darker & Visible Text) */}
+        {/* Fabric Filter Tabs */}
         <div className="flex items-center gap-2.5 pb-6 border-b border-[#C7B89A]/30 overflow-x-auto scrollbar-none">
           <button
             onClick={() => { setSelectedCategory("all"); setCurrentIndex(0); }}
@@ -99,8 +89,6 @@ export default function ShadeFilter() {
 
         {/* Products Grid Section */}
         <div className="mt-6 sm:mt-8">
-          
-          {/* 2 boxes on mobile, 4 on desktop */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
             {currentItems.map((fabric) => (
               <div 
@@ -111,7 +99,7 @@ export default function ShadeFilter() {
                 {/* Image Box */}
                 <div 
                   onClick={() => setActiveModalImage(fabric.image)}
-                  className="relative w-full aspect-[4/3] bg-[#EFECE6] rounded-lg sm:rounded-xl overflow-hidden mb-2 sm:mb-3 shadow-xs cursor-pointer group-hover:shadow-md transition-all"
+                  className="relative w-full aspect-[4/3] bg-[#EFECE6] rounded-lg sm:rounded-xl overflow-hidden mb-2 sm:mb-3 shadow-xs cursor-pointer group-hover:shadow-md transition-all flex items-center justify-center"
                 >
                   <img
                     src={fabric.image}
@@ -138,7 +126,7 @@ export default function ShadeFilter() {
             ))}
           </div>
 
-          {/* Bottom Controls / Arrows (Placed Below Grid, Disabled when boundary reached) */}
+          {/* Bottom Controls / Arrows */}
           {filteredProducts.length > 4 && (
             <div className="flex items-center justify-center gap-4 mt-8">
               <button 
