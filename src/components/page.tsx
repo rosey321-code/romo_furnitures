@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Ticker from "@/components/Ticker";
 import Footer from "@/components/Footer";
-import { Categories, Shades, Story, Warehouses, Process } from "@/components/Sections";
+import { Categories, Shades, Story, Warehouses, Process } from "@/components/showroom";
 export default function Home() {
   return (
     <>

@@ -10,31 +10,31 @@ const SHOWROOM_SLIDES = [
     id: 1,
     tag: "THE FABRIC WALL",
     title: "Over 200+ running rolls displayed in true daylight.",
-    image: "/showroom/warehouse/showroom1.png",
+    image: "/showroom/warehouse/showroom1.webp",
   },
   {
     id: 2,
     tag: "THE SEATING BAY",
     title: "Double Mosha Velvet & Bouclé upholstered silhouettes.",
-    image: "/showroom/warehouse/showroom2.png",
+    image: "/showroom/warehouse/showroom2.webp",
   },
   {
     id: 3,
     tag: "DRAPERY DROP GALLERY",
     title: "300cm extra-width ceiling drops hanging live.",
-    image: "/showroom/warehouse/showroom3.png",
+    image: "/showroom/warehouse/showroom3.webp",
   },
   {
     id: 4,
     tag: "SWATCH ATELIER",
     title: "Physical hardbound books, color swatches, and GSM lab scales.",
-    image: "/showroom/warehouse/showroom4.png",
+    image: "/showroom/warehouse/showroom4.webp",
   },
   {
     id: 5,
     tag: "WAREHOUSE VAULT",
     title: "Uncut roll inspection ready for continuous dispatch.",
-    image: "/showroom/warehouse/showroom5.png",
+    image: "/showroom/warehouse/showroom5.webp",
   },
 ];
 

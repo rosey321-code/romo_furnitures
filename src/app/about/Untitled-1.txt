@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOISU Style 3D Smooth Animation Test</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #0e0e0e;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            perspective: 1000px; /* Yeh 3D depth create karne ke liye zaroori hai */
+        }
+
+        /* Animation Container */
+        .card-container {
+            position: relative;
+            width: 400px;
+            height: 550px;
+            background: #1a1a1a;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+            transform-style: preserve-3d;
+            /* Smooth return to center when mouse leaves */
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); 
+            cursor: pointer;
+        }
+
+        /* Card ke andar ki Background Image */
+        .card-bg {
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 120%;
+            height: 120%;
+            background-image: url('https://unsplash.com');
+            background-size: cover;
+            background-position: center;
+            transform-style: preserve-3d;
+            /* Subtly shifts background for depth */
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); 
+        }
+
+        /* Dark overlay over the image */
+        .card-bg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%);
+        }
+
+        /* Card Content Layer (Text) */
+        .card-content {
+            position: absolute;
+            bottom: 40px;
+            left: 30px;
+            right: 30px;
+            color: #ffffff;
+            transform-style: preserve-3d;
+            /* Pops the text outward in 3D space */
+            transform: translateZ(60px); 
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .card-content h2 {
+            font-size: 28px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .card-content p {
+            font-size: 14px;
+            color: #b3b3b3;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HTML Structure -->
+    <div class="card-container" id="parallaxCard">
+        <div class="card-bg" id="cardBg"></div>
+        <div class="card-content">
+            <h2>Luxury Lounge</h2>
+            <p>Designed with global partners. Assembled with absolute precision in 3D space.</p>
+        </div>
+    </div>
+
+    <!-- JavaScript for Dynamic Mouse Tracking -->
+    <script>
+        const card = document.getElementById('parallaxCard');
+        const bg = document.getElementById('cardBg');
+
+        card.addEventListener('mousemove', (e) => {
+            const cardRect = card.getBoundingClientRect();
+            
+            // Mouse ki position card ke center se calculate karna
+            const cardWidth = cardRect.width;
+            const cardHeight = cardRect.height;
+            const mouseX = e.clientX - cardRect.left - cardWidth / 2;
+            const mouseY = e.clientY - cardRect.top - cardHeight / 2;
+            
+            // Max rotation angles (jitna rotate karwana ho)
+            const angleX = -(mouseY / cardHeight) * 20; // Up/Down tilt
+            const angleY = (mouseX / cardWidth) * 20;  // Left/Right tilt
+            
+            // Background Image ka inverse shift (Parallax depth ke liye)
+            const shiftX = (mouseX / cardWidth) * 15;
+            const shiftY = (mouseY / cardHeight) * 15;
+
+            // 3D Matrix apply karna smooth movements ke sath
+            card.style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg)`;
+            bg.style.transform = `scale(1.1) translateX(${-shiftX}px) translateY(${-shiftY}px)`;
+        });
+
+        // Mouse leave hone par card ka wapis apni jagah smooth aa jana
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'rotateX(0deg) rotateY(0deg)';
+            bg.style.transform = 'scale(1) translateX(0px) translateY(0px)';
+        });
+    </script>
+
+</body>
+</html>

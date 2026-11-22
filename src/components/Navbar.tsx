@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image"; // 👈 Image component import kiya
 
 export default function Navbar() {
   const [productOpen, setProductOpen] = useState(false);
@@ -15,15 +16,17 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 bg-[#F5F2EB] border-b border-[#C7B89A]/50 select-none">
       <nav className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between gap-4">
         
-        {/* 1. LEFT: Brand Logo */}
+        {/* 1. LEFT: Brand Logo (Ab yahan image aayegi) */}
         <div className="flex-shrink-0">
           <Link href="/" className="group block">
-            <span className="font-serif text-2xl md:text-3xl tracking-tight text-[#2B2C2A] font-semibold">
-              ROMO
-            </span>
-            <span className="text-[10px] tracking-[0.25em] font-sans uppercase font-medium block text-[#5A6249] group-hover:text-[#C75A28] transition-colors">
-              Furnishers
-            </span>
+            <Image
+              src="/logo.webp"
+              alt="ROMO Furnishers"
+              width={130} // Aap apne logo ke size ke mutabiq width barha ya ghata sakti hain
+              height={45} // Height adjust kar sakti hain
+              priority={true}
+              className="object-contain h-10 w-auto"
+            />
           </Link>
         </div>
 
@@ -185,10 +188,14 @@ export default function Navbar() {
           >
             <div>
               <div className="flex items-center justify-between pb-6 border-b border-[#C7B89A]/40">
-                <div>
-                  <span className="font-serif text-xl font-bold text-[#2B2C2A] block leading-none">ROMO</span>
-                  <span className="text-[9px] tracking-[0.25em] font-sans uppercase font-medium text-[#5A6249]">Furnishers</span>
-                </div>
+                {/* Mobile Drawer Logo */}
+                <Image
+                  src="/logo.webp"
+                  alt="ROMO Furnishers"
+                  width={110}
+                  height={40}
+                  className="object-contain h-8 w-auto"
+                />
                 <button 
                   onClick={() => setMobileMenuOpen(false)}
                   className="w-8 h-8 rounded-full bg-[#2B2C2A]/10 text-[#2B2C2A] hover:bg-[#2B2C2A]/20 flex items-center justify-center font-bold text-sm transition-colors"
