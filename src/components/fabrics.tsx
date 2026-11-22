@@ -96,7 +96,7 @@ export default function ShadeFilter() {
                 className="group flex flex-col bg-transparent rounded-xl transition-all duration-300"
               >
                 
-                {/* Image Box */}
+                {/* Image Box using standard <img> tag */}
                 <div 
                   onClick={() => setActiveModalImage(fabric.image)}
                   className="relative w-full aspect-[4/3] bg-[#EFECE6] rounded-lg sm:rounded-xl overflow-hidden mb-2 sm:mb-3 shadow-xs cursor-pointer group-hover:shadow-md transition-all flex items-center justify-center"
@@ -178,11 +178,13 @@ export default function ShadeFilter() {
             >
               ✕
             </button>
-            <img 
-              src={activeModalImage} 
-              alt="Fabric Zoom" 
-              className="w-full max-h-[80vh] object-contain rounded-xl"
-            />
+            <div className="relative w-full h-[70vh] flex items-center justify-center">
+              <img 
+                src={activeModalImage} 
+                alt="Fabric Zoom" 
+                className="max-w-full max-h-full object-contain rounded-xl"
+              />
+            </div>
           </div>
         </div>
       )}
