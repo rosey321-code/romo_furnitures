@@ -26,7 +26,6 @@ export default function ColorVibrancy() {
     <section className="w-full bg-[#2E3525] overflow-hidden py-16 md:py-24 border-t border-white/10 select-none">
       <div className="w-full max-w-7xl mx-auto px-6 sm:px-10">
 
-        {/* 1. CENTER CONTENT */}
         <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
           <span className="inline-block text-[11px] font-bold tracking-[0.22em] uppercase text-[#dd6526] mb-3">
             OUR CLIENTS & PARTNERS
@@ -39,9 +38,7 @@ export default function ColorVibrancy() {
           </p>
         </div>
 
-        {/* 2. LOGOS GRID (Desktop) & SLIDER (Mobile) */}
         <div>
-          {/* Desktop Grid */}
           <div className="hidden lg:grid grid-cols-6 gap-8 items-center justify-center">
             {CLIENT_PROJECTS.map((project) => (
               <div 
@@ -57,23 +54,6 @@ export default function ColorVibrancy() {
             ))}
           </div>
 
-          {/* Tablet Grid (3 columns) */}
-          <div className="hidden sm:grid lg:hidden grid-cols-3 gap-6 items-center justify-center">
-            {CLIENT_PROJECTS.map((project) => (
-              <div 
-                key={project.id} 
-                className="relative w-full max-w-[150px] mx-auto aspect-square flex items-center justify-center"
-              >
-                <img
-                  src={project.image}
-                  alt={project.name}
-                  className="w-full h-full object-contain p-2"
-                />
-              </div>
-            ))}
-          </div>
-
-          {/* Mobile Sliding Marquee */}
           <div className="block sm:hidden w-full overflow-hidden relative">
             <div className="flex w-max animate-[slideLogos_18s_linear_infinite] hover:[animation-play-state:paused]">
               {[...CLIENT_PROJECTS, ...CLIENT_PROJECTS, ...CLIENT_PROJECTS].map((project, idx) => (
