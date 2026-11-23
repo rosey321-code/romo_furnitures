@@ -8,8 +8,8 @@ import Image from "next/image";
    LOGO SHIFT: logo ko left karna ho to number barhayein (ml-14 se ml-16)
    Right gap se zyada left gap ho to isko barhayein, kam ho to ghatayein
    ============================================================ */
-const LOGO_BOX = "w-[175px] h-[65px] sm:w-[210px] sm:h-[64px] md:w-[260px] md:h-[76px]";
-const LOGO_ZOOM = "scale-[2.5]";
+const LOGO_BOX = "w-[140px] h-[52px] sm:w-[210px] sm:h-[64px] md:w-[260px] md:h-[76px]";
+const LOGO_ZOOM = "scale-[2] sm:scale-[2.5]";
 const LOGO_SHIFT = "-ml-6 sm:-ml-10 md:-ml-14";
 const LOGO_DROP = "mt-2 md:mt-3";
 const NAV_HEIGHT = "h-[76px] md:h-[96px]";
