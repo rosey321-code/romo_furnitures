@@ -1,85 +1,65 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
+
+/* ============================================================
+   SETTINGS
+   ============================================================ */
+const CATALOG_LINK = "/digital-catalog";
 
 const CLIENT_PROJECTS = [
   { id: 1, name: "Silaj", image: "/projects/project1.webp" },
   { id: 2, name: "Sheikh Jee", image: "/projects/project2.webp" },
   { id: 3, name: "Classic Interior", image: "/projects/project3.webp" },
-  { id: 4, name: "Raheem Interiors", image: "/projects/project4.webp" },
+  { id: 4, name: "Nevi Home", image: "/projects/project4.webp" },
   { id: 5, name: "Mr. Barry", image: "/projects/project5.webp" },
   { id: 6, name: "Bilal Interior", image: "/projects/project6.webp" },
 ];
 
 export default function ColorVibrancy() {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return <div className="w-full bg-[#2E3525] py-20 min-h-[400px]"></div>;
-  }
-
   return (
-    <section className="w-full bg-[#2E3525] overflow-hidden py-16 md:py-24 border-t border-white/10 select-none">
-      <div className="w-full max-w-7xl mx-auto px-6 sm:px-10">
-
-        <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-          <span className="inline-block text-[11px] font-bold tracking-[0.22em] uppercase text-[#dd6526] mb-3">
+    <section className="w-full bg-[#2E3525] border-y border-white/10 select-none">
+      <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 items-center gap-4 lg:gap-12 px-6 sm:px-10 py-6 lg:py-14">
+        
+        {/* LEFT: text */}
+        <div className="lg:col-span-6 text-center lg:text-left">
+          <span className="inline-block text-[11px] font-bold tracking-[0.22em] uppercase text-[#DDB978] mb-1.5 lg:mb-3">
             OUR CLIENTS & PARTNERS
           </span>
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-medium leading-[1.15] text-[#F5F2EB] mb-4">
+          <h2 className="font-serif text-2xl sm:text-4xl xl:text-5xl font-medium leading-[1.12] text-[#F5F2EB] mb-2.5 lg:mb-4">
             Chosen by leading interior & furniture brands
           </h2>
-          <p className="text-sm sm:text-base leading-relaxed text-[#F5F2EB]/75 max-w-xl mx-auto">
-            Top furniture makers and interior designers choose Romo fabrics for their luxury sofas, curtains, and living projects.
+          <p className="text-xs sm:text-base leading-relaxed text-[#F5F2EB]/75 max-w-xl mx-auto lg:mx-0 mb-3 lg:mb-6">
+            Top furniture makers and interior designers choose Romo fabrics for
+            their luxury sofas, curtains, and living projects.
           </p>
         </div>
 
-        <div>
-          <div className="hidden lg:grid grid-cols-6 gap-8 items-center justify-center">
-            {CLIENT_PROJECTS.map((project) => (
-              <div 
-                key={project.id} 
-                className="relative w-full max-w-[150px] mx-auto aspect-square flex items-center justify-center hover:-translate-y-1 transition-all duration-300"
+        {/* RIGHT: logo tiles */}
+        <div className="lg:col-span-6">
+          <div className="grid grid-cols-3 gap-2.5 sm:gap-5 max-w-[420px] lg:max-w-[560px] mx-auto lg:ml-auto lg:mr-0 -mt-2 lg:mt-0 pb-2 lg:pb-8">
+            {CLIENT_PROJECTS.map((project, idx) => (
+              <div
+                key={project.id}
+                title={project.name}
+                /* Yahan max-w chota kiya hai mobile ke liye aur lg:max-w-none desktop ke liye */
+                className={`mx-auto w-full max-w-[100px] sm:max-w-[130px] lg:max-w-none aspect-square rounded-xl sm:rounded-2xl bg-[#F2E5CE] p-[2px] sm:p-1 shadow-lg shadow-black/30 ${
+                  idx % 3 === 1 ? "translate-y-2 lg:translate-y-8" : "-translate-y-1 lg:translate-y-0"
+                }`}
               >
-                <img
-                  src={project.image}
-                  alt={project.name}
-                  className="w-full h-full object-contain p-2"
-                />
-              </div>
-            ))}
-          </div>
-
-          <div className="block sm:hidden w-full overflow-hidden relative">
-            <div className="flex w-max animate-[slideLogos_18s_linear_infinite] hover:[animation-play-state:paused]">
-              {[...CLIENT_PROJECTS, ...CLIENT_PROJECTS, ...CLIENT_PROJECTS].map((project, idx) => (
-                <div 
-                  key={idx} 
-                  className="w-[100px] h-[100px] mr-6 flex items-center justify-center relative flex-shrink-0"
-                >
+                <div className="w-full h-full rounded-[10px] sm:rounded-[13px] overflow-hidden bg-white">
                   <img
                     src={project.image}
                     alt={project.name}
                     className="w-full h-full object-contain"
                   />
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
 
       </div>
-
-      <style jsx global>{`
-        @keyframes slideLogos {
-          0% { transform: translateX(0%); }
-          100% { transform: translateX(-33.33%); }
-        }
-      `}</style>
     </section>
   );
 }

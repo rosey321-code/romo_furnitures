@@ -60,10 +60,10 @@ export default function ShadeFilter() {
         <div className="flex items-center gap-2.5 pb-6 border-b border-[#C7B89A]/30 overflow-x-auto scrollbar-none">
           <button
             onClick={() => { setSelectedCategory("all"); setCurrentIndex(0); }}
-            className={`px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-serif tracking-wide transition-all shrink-0 cursor-pointer ${
+            className={`px-5 sm:px-6 h-11 inline-flex items-center justify-center rounded-full border text-sm sm:text-base font-serif font-semibold tracking-wide transition-all shrink-0 cursor-pointer ${
               selectedCategory === "all"
-                ? "bg-[#484F39] text-[#F5F2EB] shadow-md font-semibold"
-                : "bg-white text-[#1A1A1A] border border-[#C7B89A]/60 hover:bg-[#EFECE6]"
+                ? "bg-[#484F39] border-[#484F39] text-[#F5F2EB] shadow-md font-semibold"
+                : "bg-white text-[#000000] border border-[#484F39]/40 hover:bg-[#EFECE6]"
             }`}
           >
             All Fabrics
@@ -73,10 +73,10 @@ export default function ShadeFilter() {
             <button
               key={fabric.id}
               onClick={() => { setSelectedCategory(fabric.name); setCurrentIndex(0); }}
-              className={`px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-serif tracking-wide transition-all shrink-0 cursor-pointer ${
+              className={`px-4 sm:px-5 py-2 rounded-full text-base sm:text-lg font-serif font-bold tracking-wide transition-all shrink-0 cursor-pointer ${
                 selectedCategory === fabric.name
                   ? "bg-[#484F39] text-[#F5F2EB] shadow-md font-semibold"
-                  : "bg-white text-[#1A1A1A] border border-[#C7B89A]/60 hover:bg-[#EFECE6]"
+                  : "bg-white text-black border border-[#484F39]/80 hover:bg-[#EFECE6]"
               }`}
             >
               {fabric.name}

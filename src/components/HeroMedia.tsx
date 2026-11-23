@@ -14,7 +14,6 @@ export default function HeroMedia() {
             className="h-full w-full object-cover"
             autoPlay
             muted
-            loop
             playsInline
             preload="none"
             poster={site.heroPoster || undefined}

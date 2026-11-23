@@ -240,9 +240,9 @@ function CatalogDetailContent() {
           {/* ==================================
               LEFT: FABRIC PREVIEW
           ================================== */}
-          <div className="flex flex-col w-full max-w-[560px] lg:max-w-[385px] shrink-0">
+          <div className="flex flex-col w-full max-w-[560px] lg:max-w-[450px] shrink-0">
             <div
-              className="relative w-full aspect-[4/3] sm:aspect-[4/3.5] bg-[#EFECE6] rounded-xl sm:rounded-2xl overflow-hidden mb-3 sm:mb-4 shadow-sm border border-[#C7B89A]/40"
+              className="relative w-full aspect-[4/3] sm:aspect-[4/3.5] lg:aspect-[4/3.8] bg-[#EFECE6] rounded-xl sm:rounded-2xl overflow-hidden mb-3 sm:mb-4 shadow-sm border border-[#C7B89A]/40"
               style={{ isolation: "isolate" }}
             >
               {/* GSM LABEL */}
@@ -375,7 +375,7 @@ function CatalogDetailContent() {
       </section>
 
       {/* ==================================
-          FULLSCREEN ZOOM MODAL
+          FULLSCREEN ZOOM MODAL (Desktop par max-w-2xl se chota kiya gaya hai)
       ================================== */}
       {isZoomOpen && (
         <div
@@ -383,7 +383,7 @@ function CatalogDetailContent() {
           onClick={() => setIsZoomOpen(false)}
         >
           <div
-            className="relative w-full max-w-4xl"
+            className="relative w-full max-w-xl sm:max-w-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -394,7 +394,7 @@ function CatalogDetailContent() {
               ×
             </button>
 
-            <div className="relative w-full h-[55vh] sm:h-[75vh] overflow-hidden rounded-xl bg-[#EFECE6]">
+            <div className="relative w-full h-[50vh] sm:h-[62vh] overflow-hidden rounded-xl bg-[#EFECE6]">
               <div
                 className="absolute inset-0 transition-transform duration-300 ease-out"
                 style={{

@@ -10,6 +10,7 @@ import Footer from "@/components/Footer";
 
 const VOLUMES = [
   { id: "101", num: "101", title: "MOSHA VELVET", tagline: "Heavy Knitted Upholstery", image: "/about/101.webp", altImage: "/about/mosha velvet.jpg", fallbackImage: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=85" },
+  { id: "105", num: "105", title: "MOSHA VELVET", tagline: "Heavy Knitted Upholstery", image: "/about/105.webp", altImage: "/about/mosha velvet.jpg", fallbackImage: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=85" },
   { id: "201", num: "201", title: "DOUBLE MOSHA", tagline: "280 GSM Pure Velvet", image: "/about/201.webp", altImage: "/about/double mosha.jpg", fallbackImage: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1200&q=85" },
   { id: "202", num: "202", title: "SELF PRINT", tagline: "Printed Floral Knitted", image: "/about/202.webp", altImage: "/about/self print mosha.jpg", fallbackImage: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?auto=format&fit=crop&w=1200&q=85" },
   { id: "301", num: "301", title: "SHEER DRAPERY", tagline: "Room Lightening Voiles", image: "/about/301.webp", altImage: "/about/sheer.jpg", fallbackImage: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=85" },
@@ -98,7 +99,6 @@ export default function AboutPage() {
             ======================================================== */}
         <section className="relative py-20 sm:py-28 px-6 lg:px-12 bg-[#F5F2EB] select-none">
           
-          {/* ================= DESKTOP VIEW (Aapka set kiya hua layout) ================= */}
           <div className="hidden sm:block max-w-7xl mx-auto text-[#2B2C2A]">
             
             {/* 1. MISSION (LEFT) */}
@@ -145,10 +145,7 @@ export default function AboutPage() {
 
           </div>
 
-          {/* ================= MOBILE VIEW (Mission & Vision Aamnay-Samnay, Approach Neeche Mid) ================= */}
           <div className="grid sm:hidden grid-cols-2 gap-3 text-[#2B2C2A]">
-            
-            {/* Mission (Mobile Left) */}
             <div className="bg-white/90 border border-[#C7B89A]/40 p-4 rounded-2xl shadow-sm flex flex-col justify-between">
               <div>
                 <span className="text-[9px] tracking-[2px] text-[#C75A28] font-bold block mb-1">01 / PURPOSE</span>
@@ -159,7 +156,6 @@ export default function AboutPage() {
               </div>
             </div>
 
-            {/* Vision (Mobile Right) */}
             <div className="bg-white/90 border border-[#C7B89A]/40 p-4 rounded-2xl shadow-sm flex flex-col justify-between">
               <div>
                 <span className="text-[9px] tracking-[2px] text-[#C75A28] font-bold block mb-1">02 / VISION</span>
@@ -170,7 +166,6 @@ export default function AboutPage() {
               </div>
             </div>
 
-            {/* Approach (Mobile Neeche Center / Full Width) */}
             <div className="col-span-2 bg-white/90 border border-[#C7B89A]/40 p-5 rounded-2xl shadow-sm text-center mt-1">
               <span className="text-[9px] tracking-[2px] text-[#C75A28] font-bold block mb-1">03 / APPROACH</span>
               <h2 className="font-serif text-lg font-light text-[#2B2C2A] mb-1">Our Approach</h2>
@@ -178,13 +173,12 @@ export default function AboutPage() {
                 We believe successful commercial partnerships begin with total transparency and verified specifications.
               </p>
             </div>
-
           </div>
 
         </section>
 
        {/* ========================================================
-            3. CATALOGUE VOLUMES
+            3. CATALOGUE VOLUMES (Desktop par object-left kiya gaya hai taake 'ROMOP' ya numbers na katein)
             ======================================================== */}
         <section className="pt-16 pb-0 bg-gradient-to-b from-[#1b1c19] via-[#161915] to-[#121311] border-t border-[#C7B89A]/30 relative overflow-hidden select-none">
           
@@ -233,7 +227,7 @@ export default function AboutPage() {
             ))}
           </div>
 
-          {/* Desktop View */}
+          {/* Desktop View (object-left use kiya hai taake left side se text/R na kate) */}
           <div
             onMouseLeave={() => setActiveVolume(null)}
             className="hidden sm:block relative w-full h-[450px] lg:h-[62vh] min-h-[420px] overflow-hidden m-0 p-0"
@@ -261,7 +255,7 @@ export default function AboutPage() {
                           e.currentTarget.src = vol.fallbackImage;
                         }
                       }}
-                      className="w-full h-full object-cover object-top block z-0 transition-transform duration-500 ease-out group-hover:scale-102"
+                      className="w-full h-full object-cover object-left block z-0 transition-transform duration-500 ease-out group-hover:scale-102"
                     />
                     <div className={`absolute bottom-5 left-4 right-4 z-20 flex items-center justify-between transition-all duration-300 pointer-events-none ${isOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}>
                       <div className="bg-[#141613]/90 backdrop-blur-md px-4 py-2 rounded-xl border border-[#C7B89A]/30 shadow-xl">

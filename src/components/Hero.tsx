@@ -5,8 +5,7 @@ import React, { useState, useEffect, useRef } from "react";
 const HEADLINE_PART_1 = "Premium Fabrics at";
 const HEADLINE_PART_2 = "Our Best Prices.";
 
-const SUBTEXT =
-  "Wholesale supply of Sofa, Curtain & Cushion fabrics.";
+const SUBTEXT = "Wholesale supply of Sofa, Curtain & Cushion fabrics.";
 
 const COLORS = {
   ivory: "#F2E5CE",
@@ -16,7 +15,7 @@ const COLORS = {
 };
 
 const features = [
-  { title: "2 Lac+", subtitle: "Meters Stock", icon: "stock" },
+  { title: "Repeat", subtitle: "Stock", icon: "stock" },
   { title: "Direct", subtitle: "Mill Pricing", icon: "price" },
   { title: "Verified", subtitle: "B2B Supply", icon: "verified" },
 ];
@@ -66,84 +65,46 @@ export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const iconTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const isActiveRef = useRef(false);
+  const hasFinishedRef = useRef(false);
 
-  const showGlassCurtains =
-    startTyping &&
-    h1Index === HEADLINE_PART_1.length &&
-    h2Index === HEADLINE_PART_2.length;
-
-  const resetAnimations = () => {
-    setStartTyping(false);
-    setH1Index(0);
-    setH2Index(0);
-    setShowH2(false);
-    setShowIcons(false);
-
-    if (iconTimerRef.current) {
-      clearTimeout(iconTimerRef.current);
-      iconTimerRef.current = null;
-    }
-  };
-
-  // Play video only while hero is visible
+  // Video plays only once per page load
   useEffect(() => {
     const video = videoRef.current;
+    const section = sectionRef.current;
+    if (!video || !section) return;
 
-    if (!video || !sectionRef.current) return;
+    video.playbackRate = 1.9;
+
+    video.onended = () => {
+      hasFinishedRef.current = true;
+      setStartTyping(true);
+      iconTimerRef.current = setTimeout(() => setShowIcons(true), 500);
+    };
 
     const observer = new IntersectionObserver(
       ([entry]) => {
+        if (hasFinishedRef.current) return;
+
         if (entry.isIntersecting) {
-          if (isActiveRef.current) return;
-
-          isActiveRef.current = true;
-          resetAnimations();
-
-          video.pause();
-          video.currentTime = 0;
-          video.playbackRate = 1.9;
-
           video.play().catch(() => {
+            hasFinishedRef.current = true;
             setStartTyping(true);
             setShowIcons(true);
           });
-
-          video.onended = () => {
-            setStartTyping(true);
-
-            iconTimerRef.current = setTimeout(() => {
-              setShowIcons(true);
-            }, 500);
-          };
         } else {
-          if (!isActiveRef.current) return;
-
-          isActiveRef.current = false;
           video.pause();
-          video.currentTime = 0;
-          video.onended = null;
-
-          resetAnimations();
         }
       },
-      {
-        threshold: 0.35,
-      }
+      { threshold: 0.35 }
     );
 
-    observer.observe(sectionRef.current);
+    observer.observe(section);
 
     return () => {
       observer.disconnect();
       video.pause();
       video.onended = null;
-
-      if (iconTimerRef.current) {
-        clearTimeout(iconTimerRef.current);
-      }
-
-      isActiveRef.current = false;
+      if (iconTimerRef.current) clearTimeout(iconTimerRef.current);
     };
   }, []);
 
@@ -181,15 +142,13 @@ export default function Hero() {
       ref={sectionRef}
       className="
         relative w-full
-        h-[80svh] min-h-[580px] max-h-[740px]
+        h-[72svh] min-h-[540px] max-h-[680px]
         md:h-[72vh] md:min-h-[520px] md:max-h-[760px]
         bg-[#292B27]
         overflow-hidden border-b border-black
       "
     >
-      {/* ========================================================
-          1. 100% CLEAR VIDEO (Zero Filter)
-          ======================================================== */}
+      {/* 1. Video */}
       <video
         ref={videoRef}
         muted
@@ -205,56 +164,18 @@ export default function Hero() {
         <source src="/animation1.webm" type="video/webm" />
       </video>
 
-      {/* Normal subtle overlay */}
-      <div className="absolute inset-0 z-10 bg-black/10 pointer-events-none" />
-
-      {/* ========================================================
-          2. SIRF BOTTOM MEIN BLACK SHADOW (Badges ke liye)
-          ======================================================== */}
-      <div className="md:hidden absolute bottom-0 left-0 w-full h-36 bg-gradient-to-t from-black/85 via-black/45 to-transparent pointer-events-none z-20" />
-
-      {/* ========================================================
-          3. GLASS CURTAIN LINES
-          ======================================================== */}
+      {/* 2. Soft warm tint, mobile only, fades in with the text */}
       <div
-        className="
-          absolute z-20
-          top-0 left-0
-          h-full w-[88%] md:w-[52%]
-          pointer-events-none
-          overflow-hidden
-        "
+        className={`md:hidden absolute inset-0 z-10 pointer-events-none transition-opacity duration-1000 ${
+          startTyping ? "opacity-100" : "opacity-0"
+        }`}
         style={{
-          clipPath: showGlassCurtains
-            ? "inset(0 0 0 0)"
-            : "inset(0 50% 0 50%)",
-          WebkitClipPath: showGlassCurtains
-            ? "inset(0 0 0 0)"
-            : "inset(0 50% 0 50%)",
-          transition:
-            "clip-path 1800ms cubic-bezier(0.22, 1, 0.36, 1), -webkit-clip-path 1800ms cubic-bezier(0.22, 1, 0.36, 1)",
-          backgroundColor: "rgba(255,255,255,0.02)",
-          backgroundImage: `
-            repeating-linear-gradient(
-              90deg,
-              rgba(255,255,255,0.03) 0px,
-              rgba(255,255,255,0.05) 2px,
-              transparent 4px,
-              transparent 26px,
-              rgba(255,255,255,0.09) 27px,
-              rgba(255,255,255,0.04) 29px,
-              transparent 32px,
-              transparent 54px
-            )
-          `,
-          backdropFilter: "blur(1.5px)",
-          WebkitBackdropFilter: "blur(1.5px)",
+          background:
+            "linear-gradient(180deg, rgba(28,24,18,0.52) 0%, rgba(28,24,18,0.44) 50%, rgba(28,24,18,0.32) 75%, rgba(28,24,18,0.55) 100%)",
         }}
       />
 
-      {/* ========================================================
-          ✨ 4. MAIN CONTENT: 100% LEFT-ALIGNED ON MOBILE & DESKTOP
-          ======================================================== */}
+      {/* 3. Main content */}
       <div
         className={`
           absolute z-30
@@ -267,7 +188,7 @@ export default function Hero() {
           ${startTyping ? "opacity-100" : "opacity-0"}
         `}
       >
-        {/* Small Label (Left Aligned) */}
+        {/* Small label */}
         <div className="flex items-center justify-start gap-3 mb-2 md:mb-3">
           <span
             className="
@@ -282,11 +203,11 @@ export default function Hero() {
           </span>
         </div>
 
-        {/* Main Heading (Left Aligned) */}
+        {/* Main heading */}
         <h1
           className="
             font-serif
-            text-[34px] sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl
+            text-[38px] sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl
             leading-[1.08] tracking-[-0.02em]
             drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]
           "
@@ -295,7 +216,7 @@ export default function Hero() {
           {HEADLINE_PART_1.substring(0, h1Index)}
         </h1>
 
-        {/* Highlighted Heading (Left Aligned) */}
+        {/* Highlighted heading */}
         <div className="mt-2 md:mt-3 flex justify-start">
           <div
             className="
@@ -307,8 +228,7 @@ export default function Hero() {
               shadow-lg
             "
             style={{
-              background:
-                "linear-gradient(90deg, #DDB978 0%, #F2D9A8 100%)",
+              background: "linear-gradient(90deg, #DDB978 0%, #F2D9A8 100%)",
             }}
           >
             <span
@@ -324,10 +244,10 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Subtitle (Left Aligned) */}
+        {/* Subtitle */}
         <p
           className="
-            text-[13px] sm:text-sm md:text-sm lg:text-base xl:text-lg
+            text-[15px] sm:text-sm md:text-sm lg:text-base xl:text-lg
             mt-3 md:mt-4
             font-normal drop-shadow-[0_1px_3px_rgba(0,0,0,0.6)]
           "
@@ -336,7 +256,7 @@ export default function Hero() {
           {SUBTEXT}
         </p>
 
-        {/* Explore Button (Left Aligned) */}
+        {/* Explore button */}
         <div className="mt-3.5 md:mt-5 flex justify-start">
           <a
             href="/digital-catalog"
@@ -362,16 +282,12 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* ========================================================
-          5. BOTTOM 3 BADGES (Pehle Ki Tarah Settle Hain)
-          ======================================================== */}
+      {/* 4. Bottom badges */}
       <div
         className={`
           absolute z-30
-          /* Mobile: Screen ke bottom par neat horizontal row */
-          bottom-3.5 left-0 w-full px-2.5 flex flex-row items-center justify-center gap-2 overflow-x-auto scrollbar-none
-          /* Desktop: Top-right vertical float */
-          md:bottom-auto md:top-[8%] md:right-[2.5%] md:left-auto md:w-[220px] md:px-0 md:flex-col md:items-end md:gap-5 lg:gap-7
+          bottom-3.5 left-0 w-full px-3 grid grid-cols-3 gap-2
+          md:bottom-auto md:top-[8%] md:right-[2.5%] md:left-auto md:w-[220px] md:px-0 md:flex md:flex-col md:items-end md:gap-5 lg:gap-7
           transition-opacity duration-1000
           ${showIcons ? "opacity-100" : "opacity-0"}
         `}
@@ -389,12 +305,11 @@ export default function Hero() {
                 "0 4px 15px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255,255,255,0.42)",
             }}
             className="
-              shrink-0 flex items-center rounded-full
-              px-2.5 py-1.5 min-h-[44px] gap-1.5
-              md:w-full md:min-h-[64px] md:px-3 md:gap-2.5
+              flex items-center justify-center rounded-full
+              w-full px-2 py-1.5 min-h-[44px] gap-1.5
+              md:justify-start md:min-h-[64px] md:px-3 md:gap-2.5
             "
           >
-            {/* Small Ivory Icon Circle */}
             <div
               className="
                 w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10
@@ -411,16 +326,12 @@ export default function Hero() {
               <FeatureIcon type={item.icon} />
             </div>
 
-            {/* Vertical Divider (Desktop Only) */}
             <div
               className="hidden md:block h-8 w-px shrink-0"
-              style={{
-                backgroundColor: "rgba(255, 250, 238, 0.82)",
-              }}
+              style={{ backgroundColor: "rgba(255, 250, 238, 0.82)" }}
             />
 
-            {/* White Feature Text */}
-            <div className="min-w-0 flex-1 pl-0.5 text-left">
+            <div className="min-w-0 pl-0.5 text-left md:flex-1">
               <h3
                 className="
                   font-serif
