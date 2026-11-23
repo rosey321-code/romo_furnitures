@@ -80,14 +80,14 @@ function ScrollColumn({
             href={CATALOG_LINK}
             className="relative w-full aspect-[3/4] rounded-xl overflow-hidden shadow-lg group block shrink-0 transition-transform duration-300 hover:scale-[1.02] bg-transparent"
           >
-            {/* Mobile: scale-110 as before. Desktop: no zoom, so ROMO at the top is not cut */}
+            {/* Koi zoom nahi, isliye upar ka ROMO mobile aur desktop dono par nahi katta */}
             <img
               src={item.image}
               alt={alt}
               onError={(e) => {
                 e.currentTarget.src = item.fallback;
               }}
-              className="w-full h-full object-cover object-top scale-110 lg:scale-100 transition-transform duration-700 group-hover:scale-125 lg:group-hover:scale-105 bg-transparent"
+              className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105 bg-transparent"
             />
             <span className="absolute bottom-2 right-2 bg-white/90 backdrop-blur-md text-[#3d4331] text-[9px] sm:text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded-full z-10 border border-white/30 shadow-md">
               {item.tag}
@@ -155,7 +155,7 @@ export default function FeatureShowcase() {
           </div>
         </div>
 
-        {/* 3. RIGHT: books */}
+        {/* 3. RIGHT: books (sirf desktop) */}
         <ScrollColumn
           items={RIGHT_ITEMS}
           direction="down"

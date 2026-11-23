@@ -270,13 +270,8 @@ export default function Navbar() {
                       >
                         → Curtains Fabric
                       </Link>
-                      <Link
-                        href="/#shades"
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="text-[#2B2C2A]/80 hover:text-[#5A6249] py-1"
-                      >
-                        → Fabric Collection
-                      </Link>
+                      
+                       
                     </div>
                   )}
                 </div>
