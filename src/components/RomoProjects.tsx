@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
 
 const CLIENT_PROJECTS = [
   { id: 1, name: "Silaj", image: "/projects/project1.webp" },
@@ -49,14 +48,10 @@ export default function ColorVibrancy() {
                 key={project.id} 
                 className="relative w-full max-w-[150px] mx-auto aspect-square flex items-center justify-center hover:-translate-y-1 transition-all duration-300"
               >
-                <Image
+                <img
                   src={project.image}
                   alt={project.name}
-                  fill
-                  priority={true}
-                  loading="eager"
-                  sizes="150px"
-                  className="object-contain p-2"
+                  className="w-full h-full object-contain p-2"
                 />
               </div>
             ))}
@@ -69,14 +64,10 @@ export default function ColorVibrancy() {
                 key={project.id} 
                 className="relative w-full max-w-[150px] mx-auto aspect-square flex items-center justify-center"
               >
-                <Image
+                <img
                   src={project.image}
                   alt={project.name}
-                  fill
-                  priority={true}
-                  loading="eager"
-                  sizes="150px"
-                  className="object-contain p-2"
+                  className="w-full h-full object-contain p-2"
                 />
               </div>
             ))}
@@ -90,12 +81,10 @@ export default function ColorVibrancy() {
                   key={idx} 
                   className="w-[100px] h-[100px] mr-6 flex items-center justify-center relative flex-shrink-0"
                 >
-                  <Image
+                  <img
                     src={project.image}
                     alt={project.name}
-                    width={90}
-                    height={90}
-                    className="object-contain"
+                    className="w-full h-full object-contain"
                   />
                 </div>
               ))}
